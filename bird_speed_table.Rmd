@@ -5,7 +5,8 @@ date: "November 30, 2015"
 output: html_document
 ---
 
-The RPubs version of the markdown file is available [here](http://rpubs.com/dbouquin/IS607_final_birdspeedtable)
+The RPubs version of the markdown file is available [here](http://rpubs.com/dbouquin/IS607_final_birdspeedtable)    
+The resulting CSV file can be found [here](https://github.com/dbouquin/Pigeons/blob/master/bird_speed_table.csv)
 
 ```{r, warning=FALSE, message=FALSE}
 library(rvest)
