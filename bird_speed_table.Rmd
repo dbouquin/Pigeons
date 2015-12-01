@@ -5,8 +5,14 @@ date: "November 30, 2015"
 output: html_document
 ---
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(rvest)
+library(stringr)
+```
+
+These scripts can be used to scrape a table by copying the table's xpath in the source. 
+I obtained this xpath using Chrome's developer tools
+```{r, warning=FALSE}
 url <- "https://en.wikipedia.org/wiki/List_of_birds_by_flight_speed"
 bird_speeds <- url %>%
   html() %>%
@@ -17,3 +23,5 @@ bird_speeds <- bird_speeds[[1]]
 head(bird_speeds)
 bird_speeds[1,]
 ```
+
+To clean up the speeds, I'll remove the citation tags in square brackets using stringr
