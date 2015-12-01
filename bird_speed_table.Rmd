@@ -88,7 +88,27 @@ There also appear to be citation brackets in the family column so I'll remove th
 ```{r}
 bird_speeds$family <- gsub("\\[(.+)\\]", "", bird_speeds$family)
 ```
-Now I'll show the resulting dataframe
+I'll also trim up the whitespace
+```{r}
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+bird_speeds$bird <- trim(bird_speeds$bird)
+bird_speeds$species <- trim(bird_speeds$species)
+bird_speeds$family <- trim(bird_speeds$family)
+bird_speeds$avg_h_speed_mph <- trim(bird_speeds$avg_h_speed_mph)
+bird_speeds$avg_h_speed_km <- trim(bird_speeds$avg_h_speed_km)
+bird_speeds$max_h_speed_mph <- trim(bird_speeds$max_h_speed_mph)
+bird_speeds$max_h_speed_km <- trim(bird_speeds$max_h_speed_km)
+bird_speeds$avg_d_speed_mph <- trim(bird_speeds$avg_d_speed_mph)
+bird_speeds$avg_d_speed_km <- trim(bird_speeds$avg_d_speed_km)
+bird_speeds$max_airspeed_mph <- trim(bird_speeds$max_airspeed_mph)
+bird_speeds$max_airspeed_km <- trim(bird_speeds$max_airspeed_km)
+```
+
+Now I'll show the resulting dataframe and write the results to a CSV
 ```{r}
 kable(head(bird_speeds), format = "markdown")
+
+#coerce dataframe to solve "list" encode error. Some of my columns became type "list", so the data.frame was no longer 2-dimensional and couldn't be exported to a 2d csv-file
+bird_speeds <- data.frame(lapply(bird_speeds, as.character), stringsAsFactors=FALSE)
+write.csv(bird_speeds, file = "bird_speed_table.csv")
 ```
