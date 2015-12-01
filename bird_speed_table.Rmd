@@ -1,0 +1,19 @@
+---
+title: "Bird_Speed_Table"
+author: "Daina Bouquin"
+date: "November 30, 2015"
+output: html_document
+---
+
+```{r}
+library(rvest)
+url <- "https://en.wikipedia.org/wiki/List_of_birds_by_flight_speed"
+bird_speeds <- url %>%
+  html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/table[1]') %>%
+  html_table()
+bird_speeds <- bird_speeds[[1]]
+
+head(bird_speeds)
+bird_speeds[1,]
+```
