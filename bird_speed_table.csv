@@ -1,0 +1,14 @@
+"","bird","species","family","avg_h_speed_mph","avg_h_speed_km","max_h_speed_mph","max_h_speed_km","avg_d_speed_mph","avg_d_speed_km","max_airspeed_mph","max_airspeed_km"
+"1","Peregrine falcon","Falco peregrinus","Falconidae","40-56","65–90","65-71","105–115","112","180","242","389"
+"2","Golden eagle","Aquila chrysaetos","Accipitridae","28-32","45–51","80","129","150","241","200","320"
+"3","Grey-headed albatross","Thalassarche Chrysostoma","Diomedeidae",NA,NA,"78.9","127",NA,NA,NA,NA
+"4","Gyrfalcon","Falco rusticolus","Falconidae","50-68","80-110","90","145","116-130","187–209","130","209"
+"5","White-throated needletail","Hirundapus caudacutus","Apodidae",NA,NA,"105","169",NA,NA,NA,NA
+"6","Swift","Apus apus","Apodidae",NA,NA,NA,NA,NA,NA,"106","171"
+"7","Eurasian hobby","Falco subbuteo","Falconidae",NA,NA,NA,NA,NA,NA,"100","161"
+"8","Frigatebird","Fregata","Fregatidae",NA,NA,NA,NA,NA,NA,"95","153"
+"9","Spur-winged goose","Plectropterus","Anatidae",NA,NA,NA,NA,NA,NA,"88","142"
+"10","Red-breasted merganser","Mergus serrator","Anatidae",NA,NA,NA,NA,NA,NA,"81","130"
+"11","Canvasback","Aythya valisineria","Anatidae",NA,NA,NA,NA,NA,NA,"73","116"
+"12","Eider","Somateria mollissima","Anatidae",NA,NA,NA,NA,NA,NA,"70","113"
+"13","Teal","Anas crecca","Anatidae",NA,NA,NA,NA,NA,NA,"69","109"
