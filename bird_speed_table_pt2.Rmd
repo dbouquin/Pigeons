@@ -1,0 +1,37 @@
+---
+title: "bird_speed_table2"
+author: "Daina Bouquin"
+date: "December 5, 2015"
+output: html_document
+---
+
+The RMarkdown version of this file can be seen rendered [here](http://rpubs.com/dbouquin/IS607_final_2_birdspeedtable).
+The CSV file used in this code is available [here](https://github.com/dbouquin/Pigeons/blob/master/bird_speed_table.csv). The code in this file is used to further edit the bird_speed_table (CSV), which was earlier extracted from Wikipedia [here](https://en.wikipedia.org/wiki/List_of_birds_by_flight_speed) but the Wiki page has since been updated. Because of this update, rather than re-write the code to do the inital steps over, this processing phase has been broken into two parts: this second part, and the first available [here](https://github.com/dbouquin/Pigeons/blob/master/bird_speed_table.Rmd).
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+```
+Pull the data from GitHub
+```{r}
+# Download the first CSV that was the result of the inital clean up phase
+download.file("https://raw.githubusercontent.com/dbouquin/Pigeons/master/bird_speed_table.csv", "bird_speed_table.csv", method="curl")
+bird_speeds <- read.csv("bird_speed_table.csv", na.strings = "NA")
+# check the structure to make sure it was properly loaded
+head(bird_speeds)
+# remove the "X" column that got created and the columns we will not need later
+drops <- c("X", "species", "family", "avg_h_speed_km", "avg_h_speed_mph", "max_h_speed_km", "max_h_speed_mph", "avg_d_speed_km", "avg_d_speed_mph", "avg_d_speed_mph", "max_airspeed_km")
+bird_speeds <- bird_speeds[,!(names(bird_speeds) %in% drops)]
+str(bird_speeds)
+# remove the records where we have no data on max airspeed
+bird_speeds <- bird_speeds[complete.cases(bird_speeds),]
+bird_speeds
+```
+Convert the max_airspeed_mph to yards/minute from mph
+```{r}
+bird_speeds <- mutate(bird_speeds, max_airspeed_ym = ((max_airspeed_mph*1760)/60))
+bird_speeds
+```
+Write the final file to a csv
+```{r}
+write.csv(bird_speeds, file = "final_bird_speeds.csv")
+```
