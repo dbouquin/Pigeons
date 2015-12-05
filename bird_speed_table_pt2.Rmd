@@ -7,6 +7,8 @@ output: html_document
 
 The RMarkdown version of this file can be seen rendered [here](http://rpubs.com/dbouquin/IS607_final_2_birdspeedtable).
 The CSV file used in this code is available [here](https://github.com/dbouquin/Pigeons/blob/master/bird_speed_table.csv). The code in this file is used to further edit the bird_speed_table (CSV), which was earlier extracted from Wikipedia [here](https://en.wikipedia.org/wiki/List_of_birds_by_flight_speed) but the Wiki page has since been updated. Because of this update, rather than re-write the code to do the inital steps over, this processing phase has been broken into two parts: this second part, and the first available [here](https://github.com/dbouquin/Pigeons/blob/master/bird_speed_table.Rmd).
+    
+The final data resulting from these two steps is on GitHub [here](https://github.com/dbouquin/Pigeons/blob/master/final_bird_speeds.csv).
 
 ```{r, warning=FALSE, message=FALSE}
 library(dplyr)
