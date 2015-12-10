@@ -1,0 +1,82 @@
+---
+title: "Pigeon_Color"
+author: "Daina Bouquin"
+date: "December 8, 2015"
+output: html_document
+---
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(randomForest)
+library(caret)
+library(car)
+library(dplyr)
+library(ipred)
+library(klaR)
+```
+```{r, warning=FALSE, message=FALSE}
+# pull the young bird racing data off GitHub
+download.file("https://raw.githubusercontent.com/dbouquin/Pigeons/master/American_Racing_Pigeon_Union_Young_Bird_Data.csv", "American_Racing_Pigeon_Union_Young_Bird_Data.csv", method="curl")
+y_birds <- read.csv("American_Racing_Pigeon_Union_Young_Bird_Data.csv", na.strings = "NA")
+```
+
+```{r, warning=FALSE, message=FALSE}
+colnames(y_birds)[8] <- "COLOR"
+colnames(y_birds)[9] <- "SEX"
+str(y_birds)
+colnames(y_birds)
+
+# I will do a visual inspection and run some standard statistics to see if there is a relationship between color and speed. 
+bp <- ggplot(data=y_birds, aes(x=COLOR, y=YPM, fill=COLOR)) + geom_boxplot()
+bp + guides(fill=FALSE)
+
+# Next I will run some stats:
+# Significance test: because we are testing continuous (speed) vs. nominal (color) we will first run one way ANOVA - assuming completely random design 
+
+fit <- aov(YPM ~ COLOR, data = y_birds) # color must be datatype factor
+
+plot(fit) # diagnostic plots
+# F statistic = Variation among sample means / Variation within groups
+summary(fit)
+```
+Now lets check to see if we can train a model to figure out if combining a few variables will help us predict a high scoring bird.
+```{r, warning=FALSE, message=FALSE}
+# make sure the points column is numeric
+y_birds$NDB.Std.Pts <- as.numeric(y_birds$NDB.Std.Pts)
+
+# create a binary value to indicate high scoring bird (80+ points)
+y_birds$highscore  <- with(y_birds, ifelse(y_birds$NDB.Std.Pts >= 80, 'high_score', y_birds$NDB.Std.Pts >= 80))
+y_birds$highscore <- as.factor(y_birds$highscore)
+
+# recode colors to limit number of categorical predictors (there are way too many)
+length(levels(y_birds$COLOR))
+
+y_birds$COLOR <- recode(y_birds$COLOR, "c('B', 'BB', 'BBAR', 'BBPD', 'BBSP', 'BBTC', 'BBWF')='black_bar'; c('BC', 'BCSP', 'BCPD', 'BCWF')='blue_check'; c('DC', 'DCSP', 'DCPD', 'DCWF')='dark_check'; c('RB', 'RBSP', 'RBPD', 'RBWF')='red_bar'; c('RC', 'RCSP', 'RCPD', 'RCWF')='red_check'; c('RED', 'RSPL')='red'; c('BSPL', 'DBB')='blue_var'; c('BLK')='black'; c('WHT')='white'; c('GRIZ')= 'grizzled'; c('IND')='indigo'; c('LAV')='lavender'; c('AND')='andalusian'; c('SLT')='slate'; c('BRWN', 'CHOC', 'BRNZ')='brown_var'; c('TIC')= 'ticked'; c('PEN', 'YLW')= 'yellow_var'; else='complex'")
+
+# Check to make sure recoding was effective
+levels(y_birds$COLOR)
+length(levels(y_birds$COLOR))
+
+# Guidance for RandomForest classification from:
+# http://cogns.northwestern.edu/cbmg/LiawAndWiener2002.pdf
+# set the seed for our random forests
+set.seed(415)
+
+# Use just a few variables to keep from overloading memory
+m <-randomForest(highscore ~ COLOR + SEX + ORGANIZATION + YEAR, data=y_birds, mtry=2,importance=TRUE, do.trace=100)
+print(m) # confusion matrix shows our model is very bad at predicting highscoring birds. It does very well classifying non-highscore birds though.
+
+# 10 fold cross-validation
+set.seed(131)
+error.m <-numeric(10)
+for(i in 1:10)error.m[i]<- errorest(highscore ~ COLOR + SEX + ORGANIZATION + YEAR,data=y_birds,model=randomForest,mtry=2)$error
+summary(error.m)
+```
+Now lets try clustering
+```{r}
+# K-Modes (categorical data) Cluster Analysis 
+# http://www.inside-r.org/packages/cran/klaR/docs/kmodes
+# tried with 2 clusters
+cl <- kmodes(y_birds, 2)
+cl$modes
+cl$size
+```
