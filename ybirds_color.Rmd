@@ -4,6 +4,9 @@ author: "Daina Bouquin"
 date: "December 8, 2015"
 output: html_document
 ---
+
+The following R code can be seen rendered on RPubs [here](http://rpubs.com/dbouquin/pigeon_color)
+
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(randomForest)
