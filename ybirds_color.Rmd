@@ -5,7 +5,7 @@ date: "December 8, 2015"
 output: html_document
 ---
 
-The following R code can be seen rendered on RPubs [here](http://rpubs.com/dbouquin/pigeon_color)
+The following R code can be seen rendered on RPubs [here](http://rpubs.com/dbouquin/ybirds_color)
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
