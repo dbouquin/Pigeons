@@ -111,7 +111,7 @@ A final analysis can be done using K-Modes Clustering
 keeps2 <- c("COLOR", "SEX", "YPM", "NDB.Std.Pts", "YEAR", "highscore", "ORGANIZATION")
 birds3 <- y_birds[keeps2]
 
-set.seed(11)
+set.seed(10)
 
 # tried with 2 clusters
 cl <- kmodes(birds3, 2)
