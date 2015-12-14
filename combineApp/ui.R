@@ -31,7 +31,7 @@ shinyUI(fluidPage(
     # Racing Pigeons Summary code:
     titlePanel("Racing Pigeons (with known distance flown)"),
     p(strong("The data was originally obtained from the folling two links:")),
-    a("American Racing Pigeon Union,", href="http://www.rpra.org/pigeon-history/pigeons-in-war/", target="_blank"),
+    a("American Racing Pigeon Union,", href="http://www.pigeon-ndb.com/ndb.php", target="_blank"),
     a("Racing Pigeon Race Results Database", href="http://www.racingpigeonmall.com/racdata/", target="_blank"),
     
     sidebarLayout(
