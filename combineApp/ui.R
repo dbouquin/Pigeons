@@ -15,7 +15,7 @@ shinyUI(fluidPage(
 
     # Dickin Medal Winners code:
     titlePanel("Dickin Medal Winners (with known distance flown)"),
-    a(strong(href="http://www.rpra.org/pigeon-history/pigeons-in-war/", target="_blank", "Link to the Dickin Medal winning pigeons' pictures.")),
+    a(href="http://www.rpra.org/pigeon-history/pigeons-in-war/", target="_blank", "Link to the Dickin Medal winning pigeons' pictures."),
     fluidRow(
       column(4, 
              selectInput("rec", 
@@ -31,8 +31,8 @@ shinyUI(fluidPage(
     # Racing Pigeons Summary code:
     titlePanel("Racing Pigeons (with known distance flown)"),
     p(strong("The data was originally obtained from the folling two links:")),
-    a(strong("American Racing Pigeon Union,", href="http://www.rpra.org/pigeon-history/pigeons-in-war/", target="_blank")),
-    a(strong("Racing Pigeon Race Results Database", href="http://www.racingpigeonmall.com/racdata/", target="_blank")),
+    a("American Racing Pigeon Union,", href="http://www.rpra.org/pigeon-history/pigeons-in-war/", target="_blank"),
+    a("Racing Pigeon Race Results Database", href="http://www.racingpigeonmall.com/racdata/", target="_blank"),
     
     sidebarLayout(
       sidebarPanel(
