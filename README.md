@@ -1,6 +1,9 @@
 # Pigeons
 IS 607 Final Project
-Contributor By Aplabetical Order: Angus Huang, Daina Bouquin, Nabila Hossain, Sanjive Kumar
+
+
+Contributor By Aplabetical Order: 
+Angus Huang, Daina Bouquin, Nabila Hossain, Sanjive Kumar
 
 
 Synopsis:
