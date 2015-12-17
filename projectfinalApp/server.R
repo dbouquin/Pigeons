@@ -86,24 +86,6 @@ tab<-kable(Final_Bird_table, align = "c", caption = "Average distance flown by r
 # Angus Analysis
 
 
-#youngbird <-  read.csv(file="./data/American_Racing_Pigeon_Union_Young_Bird_Data.csv", header=TRUE , sep=",")
-#youngbird3 <- sqldf("select * from youngbird where POS=1 order by YPM DESC")
-
-#oldbird2<-subset(oldbird, oldbird$POS == 1 )
-#oldbird2 <- oldbird2[with(oldbird2, order(-YPM)),]
-#oldbird3 <- data.frame(oldbird2[1:5,])
-#oldbird <- read.csv("./data/OldBirds.csv")
-
-
-
-#plot(oldbird2$YPM)
-#youngbird2 <- youngbird[with(youngbird, order(-YPM)),]
-#fastanimal2 <- fastanimal[with(fastanimal, order(-max_speed_ym)),]
-#fastanimal3 <-fastanimal2[1:6,]
-#fastanimal3$animal <- factor(fastanimal3$animal)
-
-
-
 
 # Define server logic for random distribution application
 shinyServer(function(input, output) {
@@ -171,12 +153,14 @@ shinyServer(function(input, output) {
   
   # Generate a summary of the data
   output$summary <- renderPrint({
-    if(input$Analysis == "0") {
-     print("No Summary Available")
-    } else if (input$PigF == "7") {
-      print("No Summary Available")
-    }
-    else if(input$Analysis == "2") {
+   # if(input$Analysis == "0") {
+    # print("No Summary Available")
+    #} else if (input$PigF == "7") {
+     # print("No Summary Available")
+    #}
+    #else 
+      
+      if(input$Analysis == "2") {
       summary(fit)
     } else if (input$Analysis == "3") {
       set.seed(415)
